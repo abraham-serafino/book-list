@@ -5,7 +5,7 @@ Demonstrating a simple CRUD web app using NextJS, Tailwind CSS, GraphQL, and Mon
 
 ## Highlights
 
-Hand-rolled [Apollo client](https://github.com/abraham-serafino/book-list/blob/main/src/app/graphql/apollo-client.js) (while I wait for the official one to get out of alpha)]
+Dockerized MongoDB server
 
 Hand-rolled custom component library with a responsive [grid system](https://github.com/abraham-serafino/book-list/blob/main/src/components/column.component.js) using Tailwind CSS (works on many mobile form factors)
 
@@ -15,7 +15,7 @@ Grid system [example](https://github.com/abraham-serafino/book-list/blob/43d083d
 
 ```bash
 npm install
-npm run database:create
+npm run database:create # requires docker
 npm run dev
 ```
 

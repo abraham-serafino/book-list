@@ -4,6 +4,8 @@ import Card from '@/components/card.component';
 import useBookList from '@/app/books/book-list.hook';
 import Column from '@/components/column.component';
 import Row from '@/components/row.component';
+import ListItem from '@/components/list-item.component';
+import List from '@/components/list.component';
 
 export default function BookListCard() {
     const { books } = useBookList();
@@ -12,17 +14,17 @@ export default function BookListCard() {
         <Card title="Book List">
             <Row justifyContent="start">
                 <Column>
-                    <ul>
+                    <List>
                         {books.map(
                             ({ authorFirstName, authorLastName, title }) => (
-                                <li key={`${title}_${authorLastName}`}>
-                                    {title}
-                                    <br />
-                                    {authorLastName}, {authorFirstName}
-                                </li>
+                                <ListItem
+                                    key={`${title}_${authorLastName}`}
+                                    title={title}
+                                    subTitle={`${authorLastName}, ${authorFirstName}`}
+                                />
                             ),
                         )}
-                    </ul>
+                    </List>
                 </Column>
             </Row>
         </Card>
