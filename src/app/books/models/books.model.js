@@ -14,10 +14,7 @@ export async function getBooks() {
     const books = await Books();
 
     try {
-        const result = await books.find({}).toArray();
-
-        console.log('find result: ', result);
-        return result;
+        return await books.find({}).toArray();
     } catch (error) {
         // @TODO add logging
         console.error('Error fetching books:', error);
@@ -29,15 +26,13 @@ export async function addBook({ title, authorFirstName, authorLastName }) {
     const books = await Books();
 
     try {
-        const insertResult = await books.insert({
+        const insertResult = await books.insertOne({
             title,
             authorFirstName,
             authorLastName,
         });
-        console.log('insertResult: ', insertResult);
 
-        const findResult = await books.find({ _id: insertResult?._id });
-        console.log('findResult: ', findResult);
+        return books.findOne({ _id: insertResult?._id });
     } catch (error) {
         // @TODO add logging
         console.error('Error fetching books:', error);

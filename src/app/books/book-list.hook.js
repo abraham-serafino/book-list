@@ -62,7 +62,7 @@ export default function useBookList() {
         setBooks(newBooks);
     };
 
-    const createBook = ({ title, authorFirstName, authorLastName }) => {
+    const createBook = async ({ title, authorFirstName, authorLastName }) => {
         const existingBook = books?.find(
             (item) =>
                 item.title === title && item.authorLastName === authorLastName,
@@ -70,6 +70,22 @@ export default function useBookList() {
 
         if (!existingBook) {
             addBook({ title, authorFirstName, authorLastName });
+
+            await request(
+                'http://localhost:3000/graphql',
+                gql`
+                    mutation CreateBook($input: NewBookInput!) {
+                        createBook(input: $input) {
+                            title
+                            authorFirstName
+                            authorLastName
+                        }
+                    }
+                `,
+                { input: { title, authorFirstName, authorLastName } },
+            );
+
+            getBooks();
         }
     };
 

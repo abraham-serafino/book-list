@@ -1,4 +1,4 @@
-import { addBook, getBooks } from '@/app/books/books.model';
+import { addBook, getBooks } from '@/app/books/models/books.model';
 
 const booksQueries = {
     books() {
@@ -7,7 +7,7 @@ const booksQueries = {
 };
 
 const booksMutations = {
-    createBook({ title, authorFirstName, authorLastName }) {
+    createBook(_, { input: { title, authorFirstName, authorLastName } }) {
         return addBook({ title, authorFirstName, authorLastName });
     },
 };

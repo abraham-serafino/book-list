@@ -2,7 +2,7 @@ import {
     booksDataTypes,
     booksQueryTypes,
     booksMutationTypes,
-} from '@/app/books/books.schema';
+} from '@/app/books/graphql/books.schema';
 
 const typeDefs = `
     ${booksDataTypes}

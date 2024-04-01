@@ -1,4 +1,7 @@
-import { booksQueries, booksMutations } from '@/app/books/books.resolvers';
+import {
+    booksQueries,
+    booksMutations,
+} from '@/app/books/graphql/books.resolvers';
 
 const resolvers = {
     Query: {
