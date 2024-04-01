@@ -7,7 +7,7 @@ export default function Card({ title = '', children }) {
         <Column>
             <div className="rounded shadow-md bg-gray-200 border m-1">
                 {title && (
-                    <Row additionalClasses="bg-gray-300">
+                    <Row additionalClasses="bg-gray-300 py-1">
                         <H3>{title}</H3>
                     </Row>
                 )}
