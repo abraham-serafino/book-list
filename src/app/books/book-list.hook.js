@@ -5,7 +5,6 @@ import { create } from 'zustand';
 import { gql, request } from 'graphql-request';
 
 const useBookListStore = create((set) => ({
-    alreadyFetched: false,
     books: [],
     addBook({ title, authorFirstName, authorLastName }) {
         return set(({ books }) => ({
@@ -15,35 +14,24 @@ const useBookListStore = create((set) => ({
     setBooks(newBooks) {
         return set((_) => ({ books: newBooks }));
     },
-    setAlreadyFetched() {
-        return set((_) => ({ alreadyFetched: true }));
-    },
 }));
 
-export default function useBookList() {
-    const { alreadyFetched, setAlreadyFetched, books, addBook, setBooks } =
-        useBookListStore(
-            ({
-                alreadyFetched,
-                setAlreadyFetched,
-                books,
-                addBook,
-                setBooks,
-            }) => ({
-                alreadyFetched,
-                setAlreadyFetched,
-                books,
-                addBook,
-                setBooks,
-            }),
-        );
+export default function useBookList({ initialData } = {}) {
+    const { books, addBook, setBooks } = useBookListStore(
+        ({ alreadyFetched, setAlreadyFetched, books, addBook, setBooks }) => ({
+            alreadyFetched,
+            setAlreadyFetched,
+            books,
+            addBook,
+            setBooks,
+        }),
+    );
 
     useEffect(() => {
-        if (!alreadyFetched) {
-            setAlreadyFetched();
-            getBooks();
+        if (initialData) {
+            setBooks(initialData);
         }
-    }, []);
+    }, [initialData]);
 
     const getBooks = async () => {
         const { books: newBooks } = await request(

@@ -7,8 +7,8 @@ import Row from '@/components/row.component';
 import ListItem from '@/components/list-item.component';
 import List from '@/components/list.component';
 
-export default function BookListCard() {
-    const { books } = useBookList();
+export default function BookListCard({ bookData }) {
+    const { books } = useBookList({ initialData: bookData });
 
     return (
         <Card title="Book List">
@@ -20,7 +20,7 @@ export default function BookListCard() {
                                 <ListItem
                                     key={`${title}_${authorLastName}`}
                                     title={title}
-                                    subTitle={`${authorLastName}, ${authorFirstName}`}
+                                    subTitle={`(Author: ${authorLastName}, ${authorFirstName})`}
                                 />
                             ),
                         )}
